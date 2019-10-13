@@ -1,0 +1,19 @@
+.layout {
+  display: grid;
+
+  grid-template-areas: "aside main";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr;
+
+  height: 100vh;
+  min-height: 100vh;
+
+  aside {
+    grid-area: aside;
+  }
+
+  main {
+    grid-area: main;
+    padding: 50px;
+  }
+}

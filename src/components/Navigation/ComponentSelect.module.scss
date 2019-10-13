@@ -1,0 +1,24 @@
+.componentSelect {
+  display: flex;
+  align-items: center;
+
+  :global {
+    .bp3-popover-target,
+    .bp3-popover-wrapper {
+      width: 100%;
+    }
+  }
+
+  p {
+    font-weight: 500;
+    margin: 0 0 0 1em;
+
+    span {
+      color: rgb(102, 102, 102);
+      font-weight: 500;
+      background: rgb(238, 238, 238);
+      padding: 5px 8px;
+      border-radius: 6px;
+    }
+  }
+}
