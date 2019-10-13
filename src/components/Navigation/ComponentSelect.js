@@ -19,7 +19,7 @@ export default function ComponentSelect({ location, menuOpen, onMenuClick }) {
 
   return (
     <div className={classes.componentSelect}>
-      <Popover minimal position={Position.TOP}>
+      <Popover minimal position={Position.TOP_LEFT}>
         <Button
           rightIcon="chevron-down"
           alignText="left"
@@ -27,6 +27,7 @@ export default function ComponentSelect({ location, menuOpen, onMenuClick }) {
             matchingComponent ? matchingComponent.name : "Go to component..."
           }
           fill
+          large
         />
         <Menu large>
           {components.map(c =>
@@ -55,6 +56,7 @@ export default function ComponentSelect({ location, menuOpen, onMenuClick }) {
         icon={menuOpen ? "cross" : "menu"}
         onClick={onMenuClick}
         minimal
+        large
       />
     </div>
   );

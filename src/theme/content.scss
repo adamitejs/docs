@@ -76,6 +76,11 @@ main {
     height: 1px;
     background: rgba(180, 180, 180, 0.2);
   }
+
+  .bp3-button {
+    margin-right: 1em;
+    margin-bottom: 1em;
+  }
 }
 
 .codebar {
@@ -126,6 +131,10 @@ main {
 
     hr {
       margin: 4em -30px;
+    }
+
+    .bp3-button {
+      width: 100%;
     }
   }
 
