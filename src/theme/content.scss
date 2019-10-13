@@ -61,6 +61,7 @@ main {
     gap: 120px;
 
     & > pre {
+      background-color: rgb(42, 39, 52);
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
     }
@@ -107,6 +108,10 @@ main {
 
     pre {
       margin-top: 0 !important;
+    }
+
+    hr {
+      margin: 4em -30px;
     }
   }
 

@@ -4,13 +4,14 @@ import {
   Popover,
   Menu,
   MenuItem,
-  MenuDivider
+  MenuDivider,
+  Position
 } from "@blueprintjs/core";
 import { navigate } from "gatsby";
 import useComponents from "./useComponents";
 import classes from "./ComponentSelect.module.scss";
 
-export default function ComponentSelect({ location }) {
+export default function ComponentSelect({ location, menuOpen, onMenuClick }) {
   const components = useComponents();
   const matchingComponent = components.find(
     c => c.path === `/${location.pathname.split("/")[1]}`
@@ -18,7 +19,7 @@ export default function ComponentSelect({ location }) {
 
   return (
     <div className={classes.componentSelect}>
-      <Popover>
+      <Popover minimal position={Position.TOP}>
         <Button
           rightIcon="chevron-down"
           alignText="left"
@@ -48,6 +49,13 @@ export default function ComponentSelect({ location }) {
           <span>v{matchingComponent.version}</span>
         </p>
       )}
+
+      <Button
+        className={classes.menu}
+        icon={menuOpen ? "cross" : "menu"}
+        onClick={onMenuClick}
+        minimal
+      />
     </div>
   );
 }

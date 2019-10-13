@@ -1,21 +1,31 @@
-import React from "react";
-import classes from "./Navigation.module.scss";
+import React, { useState } from "react";
+import { Link } from "gatsby";
 import ComponentSelect from "./ComponentSelect";
 import Title from "./Title";
 import useGroups from "./useGroups";
-import { Link } from "gatsby";
+import classNames from "classnames";
+import classes from "./Navigation.module.scss";
 
 export default function Navigation({ location }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   const groups = useGroups(location);
 
   return (
-    <aside className={classes.navigation}>
-      <section>
+    <aside
+      className={classNames(classes.navigation, { [classes.open]: menuOpen })}
+    >
+      <section className={classes.title}>
         <Title />
       </section>
+
       <section>
-        <ComponentSelect location={location} />
+        <ComponentSelect
+          menuOpen={menuOpen}
+          location={location}
+          onMenuClick={() => setMenuOpen(!menuOpen)}
+        />
       </section>
+
       <section>
         {groups.map(g => (
           <div className={classes.group} key={g.path}>
@@ -23,12 +33,16 @@ export default function Navigation({ location }) {
             <ul>
               {g.pages.map(p => (
                 <li key={p.path}>
-                  <Link to={p.path}>{p.name}</Link>
+                  <Link onClick={() => setMenuOpen(false)} to={p.path}>
+                    {p.name}
+                  </Link>
                   {p.subpages && location.pathname.startsWith(p.path) && (
                     <ul>
                       {p.subpages.map(sp => (
                         <li key={sp.path}>
-                          <Link to={sp.path}>{sp.name}</Link>
+                          <Link onClick={() => setMenuOpen(false)} to={sp.path}>
+                            {sp.name}
+                          </Link>
                         </li>
                       ))}
                     </ul>

@@ -17,8 +17,25 @@
       color: rgb(102, 102, 102);
       font-weight: 500;
       background: rgb(238, 238, 238);
-      padding: 5px 8px;
+      padding: 7px 10px;
       border-radius: 6px;
+    }
+  }
+
+  .title {
+    display: none;
+  }
+
+  .menu {
+    display: none;
+  }
+}
+
+@media (max-width: 850px) {
+  .componentSelect {
+    .menu {
+      display: inherit;
+      margin-left: 1em;
     }
   }
 }

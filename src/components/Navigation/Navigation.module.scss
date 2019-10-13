@@ -4,13 +4,18 @@
   width: 250px;
   background: rgb(250, 250, 250);
   border-right: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
 
   section {
     padding: 1em;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 
     &:last-child {
+      flex: 1;
       border-bottom: none;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
   }
 
@@ -68,11 +73,20 @@
 }
 
 @media (max-width: 1024px) {
+  .title {
+    display: none;
+  }
   .navigation {
     position: fixed;
     top: 0;
-    bottom: 0;
     left: 0;
-    transform: translateX(-255px);
+    right: 0;
+    width: 100%;
+    height: 60px;
+    overflow-y: hidden;
+    transition: height 250ms ease-in-out;
+    &.open {
+      height: 100%;
+    }
   }
 }
