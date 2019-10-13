@@ -1,3 +1,122 @@
-# Querying Data
+# Querying data
 
-<span className="lead">Learn how to use the Adamite SDK</span>
+<span className="lead">
+  You can access data in the Adamite by creating a reference to that data. Once
+  you have a reference, you can get a snapshot of its data, or subscribe to it
+  for changes.
+</span>
+
+## Create a reference
+
+### Reference a collection
+
+<section>
+
+<div>
+
+You can reference a collection of documents by calling the `collection`
+method.
+
+</div>
+
+```jsx
+import adamite from "@adamite/sdk";
+
+const usersRef = adamite()
+  .database()
+  .collection("user");
+```
+
+</section>
+
+### Reference a document
+
+<section>
+
+<div>
+
+Once you have a collection reference, you can reference an individual document in that collection using the `doc` method.
+
+</div>
+
+```jsx
+const usersRef = adamite()
+  .database()
+  .collection("user")
+  .doc("document_id");
+```
+
+</section>
+
+---
+
+## Get a snapshot from a reference
+
+<section>
+
+<div>
+
+To obtain a snapshot of the data in a reference, you can call the `get` method. On a collection snapshot, you can access the documents in the collection using the `docs` property.
+
+</div>
+
+```jsx
+const usersSnap = adamite()
+  .database()
+  .collection("user")
+  .get();
+
+usersSnap.docs.forEach(user => {
+  console.log(user.data.name);
+});
+```
+
+</section>
+
+<br /><br />
+
+<section>
+
+<div>
+
+On an individual document snapshot, you can access the document's data using the `data` property.
+
+</div>
+
+```jsx
+const userSnap = adamite()
+  .database()
+  .collection("user")
+  .doc("document_id")
+  .get();
+
+console.log(userSnap.data.name);
+```
+
+</section>
+
+---
+
+## Subscribe to changes on a reference
+
+<section>
+
+<div>
+
+Adamite's database is real-time, and you can subscribe to changes to a collection or a document reference using the `onSnapshot` method.
+
+</div>
+
+```jsx
+const usersRef = adamite()
+  .database()
+  .collection("user");
+
+usersRef.onSnapshot(snap => {
+  snap.docs.forEach(user => {
+    console.log(user.data.name);
+  });
+});
+```
+
+</section>
