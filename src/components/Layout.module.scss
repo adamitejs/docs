@@ -17,3 +17,11 @@
     padding: 50px;
   }
 }
+
+@media (max-width: 850px) {
+  .layout {
+    main {
+      padding: 30px;
+    }
+  }
+}

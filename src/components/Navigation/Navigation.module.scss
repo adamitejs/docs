@@ -46,6 +46,7 @@
           &:hover,
           &[aria-current="page"] {
             color: $color-primary;
+            opacity: 1;
           }
         }
 
@@ -63,5 +64,15 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: 1024px) {
+  .navigation {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-255px);
   }
 }

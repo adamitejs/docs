@@ -2,8 +2,17 @@ module.exports = {
   siteMetadata: {
     title: `Adamite Docs`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    author: `@adamitejs`,
     components: [
+      {
+        path: "/architecture",
+        name: "Architecture",
+        groups: []
+      },
+      {
+        type: "divider",
+        title: "Components"
+      },
       {
         path: "/sdk",
         name: "SDK",

@@ -1,4 +1,5 @@
 import SEO from "../../components/SEO";
+import { Callout, Intent } from "@blueprintjs/core";
 
 <SEO title="SDK" />
 
@@ -7,3 +8,57 @@ import SEO from "../../components/SEO";
 <span className="lead">
   The Adamite SDK allows you to connect your client to your Adamite instance.
 </span>
+
+## Install the SDK
+
+<section>
+
+<div>
+
+To get started, install the SDK using `yarn` or `npm`.
+
+</div>
+
+```bash
+# Using NPM
+npm install --save @adamite/sdk
+
+# Using Yarn
+yarn add @adamite/sdk
+```
+
+</section>
+
+---
+
+## Initialize the SDK
+
+<section>
+
+<div>
+
+Once installed, you can initialize the SDK to connect it to your Adamite instance.
+
+</div>
+
+```jsx
+import adamite, {
+  AuthPlugin,
+  DatabasePlugin,
+  FunctionsPlugin
+} from "@adamite/sdk";
+
+adamite()
+  .use(AuthPlugin)
+  .use(DatabasePlugin)
+  .use(FunctionsPlugin)
+  .initializeApp({
+    apiUrl: "http://localhost:9000",
+    databaseUrl: "http://localhost:9001",
+    authUrl: "http://localhost:9002",
+    functionsUrl: "http://localhost:9003",
+    apiKey: "your_api_key"
+  });
+```
+
+</section>

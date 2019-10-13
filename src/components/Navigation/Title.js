@@ -1,10 +1,13 @@
 import React from "react";
+import { Link } from "gatsby";
 import classes from "./Title.module.scss";
 
 export default function Title() {
   return (
     <div className={classes.title}>
-      <p>Adamite</p>
+      <Link to="/">
+        <p>Adamite</p>
+      </Link>
     </div>
   );
 }

@@ -8,6 +8,8 @@ export default function useComponents() {
           components {
             path
             name
+            type
+            title
             version
           }
         }

@@ -25,7 +25,9 @@ export default function useGroups(location) {
     }
   `);
 
-  return data.site.siteMetadata.components.find(
+  const matchingComponent = data.site.siteMetadata.components.find(
     c => c.path === `/${location.pathname.split("/")[1]}`
-  ).groups;
+  );
+
+  return matchingComponent ? matchingComponent.groups : [];
 }

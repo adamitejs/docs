@@ -1,17 +1,127 @@
 main {
   color: rgb(17, 17, 17);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 
   h1 {
+    color: rgb(17, 17, 17);
     font-size: 40px;
     font-weight: 600;
     margin: 0 0 30px 0;
+    max-width: 40%;
+  }
+
+  h2 {
+    color: rgb(17, 17, 17);
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  h3 {
+    color: rgb(17, 17, 17);
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  p,
+  li {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgb(51, 51, 51);
+    margin-bottom: 20px;
+
+    code {
+      font-family: "Overpass Mono", monospace;
+      font-weight: 600;
+    }
+  }
+
+  ul,
+  ol {
+    padding-left: 2em;
+    li {
+      margin: 0.5em 0;
+    }
   }
 
   .lead {
+    display: block;
     font-weight: 300;
     font-size: 26px;
     line-height: 1.4;
     margin-bottom: 40px;
     color: rgb(51, 51, 51);
+    max-width: 40%;
+  }
+
+  & > section {
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr;
+    gap: 120px;
+
+    & > pre {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  hr {
+    display: block;
+    margin: 4em -50px;
+    border: none;
+    height: 1px;
+    background: rgba(180, 180, 180, 0.2);
+  }
+}
+
+.codebar {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: calc(50% - 125px);
+  height: 100%;
+  z-index: -1;
+  background: rgb(42, 39, 52);
+}
+
+@media (max-width: 1024px) {
+  .codebar {
+    width: 50%;
+  }
+}
+
+@media (max-width: 850px) {
+  main {
+    & > section {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      gap: 0px;
+    }
+
+    h1,
+    .lead {
+      max-width: unset;
+    }
+
+    pre {
+      margin-top: 0 !important;
+    }
+  }
+
+  .codebar {
+    display: none;
+  }
+}
+
+@media (min-width: 850px) {
+  main {
+    pre {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
   }
 }
