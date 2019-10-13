@@ -15,12 +15,14 @@ main {
     color: rgb(17, 17, 17);
     font-size: 24px;
     font-weight: 600;
+    max-width: 40%;
   }
 
   h3 {
     color: rgb(17, 17, 17);
     font-size: 17px;
     font-weight: 600;
+    max-width: 40%;
   }
 
   p,
@@ -86,6 +88,16 @@ main {
   background: rgb(42, 39, 52);
 }
 
+@media (min-width: 1200px) {
+  main {
+    & > section {
+      & > div {
+        margin-right: 80px;
+      }
+    }
+  }
+}
+
 @media (max-width: 1024px) {
   .codebar {
     width: 50%;
@@ -102,6 +114,8 @@ main {
     }
 
     h1,
+    h2,
+    h3,
     .lead {
       max-width: unset;
     }
