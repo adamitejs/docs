@@ -47,6 +47,20 @@ module.exports = {
                     name: "Limiting Data"
                   }
                 ]
+              },
+              {
+                path: "/sdk/database/modifying",
+                name: "Modifying Data"
+              }
+            ]
+          },
+          {
+            path: "/sdk/functions",
+            name: "Functions",
+            pages: [
+              {
+                path: "/sdk/functions/invoking",
+                name: "Invoking Functions"
               }
             ]
           }

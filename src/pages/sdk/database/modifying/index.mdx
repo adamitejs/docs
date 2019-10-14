@@ -1,0 +1,118 @@
+# Modifying data
+
+<span className="lead">
+  You can create, update, and delete documents in Adamite by creating a
+  reference to that data. Once you have a reference, you can modify the
+  underlying data with the SDK.
+</span>
+
+## Create a reference
+
+### Reference a collection
+
+<section>
+
+<div>
+
+You can reference a collection of documents by calling the `collection`
+method.
+
+</div>
+
+```jsx
+import adamite from "@adamite/sdk";
+
+const usersRef = adamite()
+  .database()
+  .collection("user");
+```
+
+</section>
+
+### Reference a document
+
+<section>
+
+<div>
+
+Once you have a collection reference, you can reference an individual document in that collection using the `doc` method.
+
+</div>
+
+```jsx
+const usersRef = adamite()
+  .database()
+  .collection("user")
+  .doc("document_id");
+```
+
+</section>
+
+---
+
+## Create new documents in a collection
+
+<section>
+
+<div>
+
+You can create a new document in a collection by calling the `create` method on a reference to that collection. Once created, a snapshot of the new document is returned.
+
+</div>
+
+```jsx
+adamite()
+  .database()
+  .collection("users")
+  .create({
+    name: "John Smith",
+    age: 23,
+    email: "john@gmail.com"
+  });
+```
+
+</section>
+
+---
+
+## Update a document
+
+<section>
+
+<div>
+
+You can update a document by calling the `update` method on a reference to that document. Once updated, a snapshot of the new document is returned.
+
+</div>
+
+```jsx
+adamite()
+  .database()
+  .collection("users")
+  .doc("document_id")
+  .update({ age: 25 });
+```
+
+</section>
+
+---
+
+## Delete a document
+
+<section>
+
+<div>
+
+You can delete a document by calling the `delete` method on a reference to that document.
+
+</div>
+
+```jsx
+adamite()
+  .database()
+  .collection("users")
+  .doc("document_id")
+  .delete();
+```
+
+</section>

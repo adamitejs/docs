@@ -1,0 +1,27 @@
+# Invoking functions
+
+<span className="lead">
+  Functions are powerful pieces of server-side logic that you can call or invoke
+  from your app. Anything that you can't do with the database system directly,
+  you should be able to do with functions.
+</span>
+
+<section>
+
+<div>
+
+To invoke a function, call the `invoke` method. You can pass a single argument to the function (which can be an object or an array if you choose). Whatever the function returns will be returned as a resolved promise.
+
+</div>
+
+```jsx
+import adamite from "@adamite/sdk";
+
+const result = await adamite()
+  .functions()
+  .invoke("add", [1, 2]);
+
+console.log(result); // 3
+```
+
+</section>
