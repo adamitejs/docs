@@ -19,11 +19,7 @@ export default function ComponentSelect({ location, menuOpen, onMenuClick }) {
 
   return (
     <div className={classes.componentSelect}>
-      <Popover
-        minimal
-        portalContainer={document.body}
-        position={Position.BOTTOM_LEFT}
-      >
+      <Popover minimal position={Position.BOTTOM_LEFT}>
         <Button
           rightIcon="chevron-down"
           alignText="left"
