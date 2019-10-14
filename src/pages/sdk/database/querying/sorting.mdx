@@ -1,0 +1,43 @@
+import { Callout, Intent } from "@blueprintjs/core";
+
+# Sorting documents in a collection
+
+<span className="lead">
+  When referencing a collection, you may want to change the order that documents
+  are returned in.
+</span>
+
+<section>
+
+<div>
+
+Start out by referencing a collection. You can only apply ordering rules to a collection reference.
+
+</div>
+
+```jsx
+const postsReference = adamite()
+  .database()
+  .collection("posts");
+```
+
+</section>
+
+## Order by a property
+
+<section>
+
+<div>
+
+You can order a collection by properties on its documents using the `orderBy` method.
+
+</div>
+
+```jsx
+const postsReference = adamite()
+  .database()
+  .collection("posts")
+  .orderBy("name", "asc");
+```
+
+</section>

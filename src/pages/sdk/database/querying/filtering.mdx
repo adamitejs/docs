@@ -30,7 +30,7 @@ const postsReference = adamite()
 
 <div>
 
-You can filter a collection by properties on its documents using the `filter` method.
+You can filter a collection by properties on its documents using the `where` method.
 
 </div>
 
@@ -59,50 +59,6 @@ const postsReference = adamite()
   .collection("posts")
   .where("title", "==", "My First Post")
   .where("subtitle", "==", "An exercise in testing.");
-```
-
-</section>
-
-## Sort documents in the collection
-
-<section>
-
-<div>
-
-You can change how the documents are sorted using the `orderBy` method. Available operations include `==`, `!=`, `>=`, `<=`, `>` and `<`.
-
-</div>
-
-```jsx
-const postsReference = adamite()
-  .database()
-  .collection("posts")
-  .orderBy("title", "asc"); // or "desc"
-```
-
-</section>
-
-## Limit the number of returned documents
-
-<section>
-
-<div>
-
-By default, only the top 1000 documents will be returned in a snapshot. You can increase or decrease this amount using the `limit` function.
-
-<Callout intent={Intent.PRIMARY} icon={null}>
-  The maximum allowed limit is currently 10000 documents. Setting the limit
-  higher than this will not work. Eventually, support for pagination will be
-  included.
-</Callout>
-
-</div>
-
-```jsx
-const postsReference = adamite()
-  .database()
-  .collection("posts")
-  .limit(10);
 ```
 
 </section>

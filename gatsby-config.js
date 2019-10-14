@@ -37,6 +37,14 @@ module.exports = {
                   {
                     path: "/sdk/database/querying/filtering",
                     name: "Filtering Data"
+                  },
+                  {
+                    path: "/sdk/database/querying/sorting",
+                    name: "Sorting Data"
+                  },
+                  {
+                    path: "/sdk/database/querying/limiting",
+                    name: "Limiting Data"
                   }
                 ]
               }

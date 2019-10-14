@@ -1,0 +1,33 @@
+import { Callout, Intent } from "@blueprintjs/core";
+
+# Limiting the number of documents returned
+
+<span className="lead">
+  When referencing a collection, you may want to limit the snapshot to a certain
+  number of documents.
+</span>
+
+<section>
+
+<div>
+
+You can limit the number of documents by calling the `limit` function on a collection reference.
+
+By default, only the top 1000 documents will be returned in a snapshot. You can increase or decrease this amount using the `limit` function.
+
+<Callout intent={Intent.PRIMARY} icon={null}>
+  The maximum allowed limit is currently 10000 documents. Setting the limit
+  higher than this will not work. Eventually, support for pagination will be
+  included.
+</Callout>
+
+</div>
+
+```jsx
+const postsReference = adamite()
+  .database()
+  .collection("posts")
+  .limit(50);
+```
+
+</section>
