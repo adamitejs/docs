@@ -1,25 +1,29 @@
-import React from "react";
+import React from "react"
 import {
   Button,
   Popover,
   Menu,
   MenuItem,
   MenuDivider,
-  Position
-} from "@blueprintjs/core";
-import { navigate } from "gatsby";
-import useComponents from "./useComponents";
-import classes from "./ComponentSelect.module.scss";
+  Position,
+} from "@blueprintjs/core"
+import { navigate } from "gatsby"
+import useComponents from "./useComponents"
+import classes from "./ComponentSelect.module.scss"
 
 export default function ComponentSelect({ location, menuOpen, onMenuClick }) {
-  const components = useComponents();
+  const components = useComponents()
   const matchingComponent = components.find(
     c => c.path === `/${location.pathname.split("/")[1]}`
-  );
+  )
 
   return (
     <div className={classes.componentSelect}>
-      <Popover minimal position={Position.TOP_LEFT}>
+      <Popover
+        minimal
+        portalContainer={document.body}
+        position={Position.BOTTOM_LEFT}
+      >
         <Button
           rightIcon="chevron-down"
           alignText="left"
@@ -59,5 +63,5 @@ export default function ComponentSelect({ location, menuOpen, onMenuClick }) {
         large
       />
     </div>
-  );
+  )
 }

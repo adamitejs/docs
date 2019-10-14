@@ -76,17 +76,34 @@
   .title {
     display: none;
   }
+
   .navigation {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     width: 100%;
-    height: 69px;
-    overflow-y: hidden;
-    transition: height 250ms ease-in-out;
+    z-index: 10;
+    border-right: none;
+
+    section:last-child {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 0px;
+      visibility: hidden;
+      z-index: 10;
+      background: rgb(250, 250, 250);
+      transition: height 250ms ease-in-out, visibility 250ms linear;
+    }
+
     &.open {
-      height: 100%;
+      section:last-child {
+        height: 100%;
+        visibility: unset;
+      }
     }
   }
 }
