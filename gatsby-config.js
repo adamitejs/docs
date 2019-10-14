@@ -43,6 +43,51 @@ module.exports = {
             ]
           }
         ]
+      },
+      {
+        path: "/functions",
+        name: "Functions",
+        version: "0.1.0",
+        groups: []
+      },
+      {
+        path: "/database",
+        name: "Database",
+        version: "0.1.0",
+        groups: [
+          {
+            path: "/database",
+            name: "Get Started",
+            pages: [{ path: "/database", name: "Introduction" }]
+          },
+          {
+            path: "/database/security",
+            name: "Security",
+            pages: [
+              {
+                path: "/database/security",
+                name: "Writing Security Rules",
+                subpages: [
+                  { path: "/database/security/reads", name: "Securing Reads" },
+                  {
+                    path: "/database/security/writes",
+                    name: "Securing Writes"
+                  },
+                  {
+                    path: "/database/security/deletes",
+                    name: "Securing Deletes"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        path: "/auth",
+        name: "Auth",
+        version: "0.1.0",
+        groups: []
       }
     ]
   },

@@ -1,0 +1,85 @@
+# Writing Security Rules
+
+<span className="lead">
+  Since your app has direct access to the database on the client side, you must
+  secure your database with rules.
+</span>
+
+<section>
+
+Rules can restrict access to data based on the user requesting it. Rules can also validate incoming data and make sure it's in a valid state for your database.
+
+</section>
+
+## Introduction to rules
+
+<section>
+
+<div>
+
+Rules are added to collections. When a document is created, read, updated, or deleted from a collection, an appropriate rule is checked first.
+
+If a rule isn't present, the operation is allowed. If a rule _is_ present, the operation will only be allowed if the rule returns `true`. If a rule returns `false` or throws an error, the operation won't be permitted.
+
+</div>
+
+```js
+module.exports = {
+  databaseName: {
+    collectionName: {
+      read: () => {},
+      create: () = {},
+      update: () = {},
+      delete: () => {}
+    }
+  }
+}
+```
+
+</section>
+
+## Specify your database ruleset
+
+<section>
+
+<div>
+
+If you used the Adamite boilerplate, your rules are already defined in `database/rules.js`. If not, create a file with a basic ruleset.
+
+</div>
+
+```js
+// database/rules.js
+
+module.exports = {
+  default: {}
+};
+```
+
+</section>
+
+<br /><br />
+
+<section>
+
+<div>
+
+Now, you can point the database service to your ruleset in the `adamite.js` config file. Again, if you used the boilerplate, this is already done for you.
+
+</div>
+
+```js
+// adamite.js
+
+module.exports = {
+  services: {
+    database: {
+      config: {
+        rules: require("./database/rules")
+      }
+    }
+  }
+};
+```
+
+</section>

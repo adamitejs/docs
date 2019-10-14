@@ -1,0 +1,99 @@
+# Securing Reads
+
+<span className="lead">
+  When you request a snapshot from the database, it will first check to see if
+  the relevant collection has a read rule.
+</span>
+
+## Basic read rule
+
+<section>
+
+<div>
+
+To secure reads, you can add a `read` rule to a collection. Regardless of if a collection is queried or an individual document is queried, the rule will be ran. Additionally, the rule will be ran per document, allowing you to filter certain documents out of a collection query.
+
+</div>
+
+```js
+module.exports = {
+  default: {
+    posts: {
+      read: ({ client }) => {
+        // allow posts to be read by authenticated users only
+        return !!client.auth;
+      }
+    }
+  }
+};
+```
+
+</section>
+
+## More examples
+
+### Only allow owners to read a document
+
+<section>
+
+<div>
+
+Check that the requesting user is authorized and is the owner of the document.
+
+</div>
+
+```js
+read: ({ client }, { data }) => {
+  return !!client.auth && client.auth.sub === data.owner;
+};
+```
+
+</section>
+
+### Implement soft deletion
+
+<section>
+
+<div>
+
+Only allow reads for files that don't have a `deleted` flag.
+
+</div>
+
+```js
+read: (req, { data }) => {
+  return !data.deleted;
+};
+```
+
+</section>
+
+### Restrict reading to those with a certain role
+
+<section>
+
+<div>
+
+You can reference other data in the database using the Adamite SDK.
+
+</div>
+
+```js
+import adamite from "@adamite/sdk";
+
+read: async ({ client }) => {
+  if (!!client.auth) {
+    return false;
+  }
+
+  const userSnap = await adamite()
+    .database()
+    .collection("users")
+    .doc(client.auth.sub)
+    .get();
+
+  return userSnap.data.role === "admin";
+};
+```
+
+</section>

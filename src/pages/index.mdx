@@ -1,1 +1,124 @@
-# Hello World
+import { Button } from "@blueprintjs/core";
+import { navigate } from "gatsby";
+
+# Adamite
+
+<span className="lead">
+  Adamite is a self-hosted platform as a service (PaaS) designed to let quickly
+  prototype ideas and focus on writing your app.
+</span>
+
+<section>
+
+<div>
+
+To get started with Adamite, we recommend downloading the [`start`](https://github.com/adamitejs/start) boilerplate. It's pre-configured to give you access to all of Adamite's core services.
+
+<Button
+  large
+  text="Download Adamite Boilerplate"
+  icon="import"
+  onClick={() =>
+    window.open("https://github.com/adamitejs/start/archive/master.zip")
+  }
+/>
+
+</div>
+
+```bash
+wget https://github.com/adamitejs/start/archive/master.zip
+
+unzip master.zip my-app/
+```
+
+</section>
+
+---
+
+## Install dependencies and run
+
+<section>
+
+<div>
+
+Once you've downloaded the boilerplate, use `npm` or `yarn` to install dependencies.
+
+</div>
+
+```bash
+# Using NPM
+npm install
+
+# Using Yarn
+yarn install
+```
+
+</section>
+
+<br /><br />
+
+<section>
+
+<div>
+
+You can start your Adamite instance using `npm` or `yarn` as well.
+
+</div>
+
+```bash
+# Using NPM
+npm start
+
+# Using Yarn
+yarn start
+```
+
+</section>
+
+---
+
+## Next steps
+
+<section>
+
+<div>
+
+Now that everything is set up and running, you can connect to your Adamite instance using the SDK. You can also learn about the different services in your instance.
+
+<Button
+  large
+  text="Adamite SDK Docs"
+  rightIcon="arrow-top-right"
+  onClick={() => navigate("/sdk")}
+  alignText="left"
+/>
+
+<br /><br />
+
+<Button
+  large
+  text="Database Docs"
+  rightIcon="arrow-top-right"
+  onClick={() => navigate("/database")}
+  alignText="left"
+/>
+
+<Button
+  large
+  text="Functions Docs"
+  rightIcon="arrow-top-right"
+  onClick={() => navigate("/functions")}
+  alignText="left"
+/>
+
+<Button
+  large
+  text="Auth Docs"
+  rightIcon="arrow-top-right"
+  onClick={() => navigate("/auth")}
+  alignText="left"
+/>
+
+</div>
+
+</section>
