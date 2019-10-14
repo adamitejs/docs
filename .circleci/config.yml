@@ -35,5 +35,5 @@ jobs:
 
       - run:
           command: |
-            CI=false npm run build:ci
+            npm run build
             yarn deploy
