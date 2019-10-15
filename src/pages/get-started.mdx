@@ -1,0 +1,123 @@
+import { Button, Callout, Intent } from "@blueprintjs/core"
+import { navigate } from "gatsby"
+
+# Get Started
+
+<span className="lead">
+  To start working with Adamite, you'll need to set up an Adamite instance.
+</span>
+
+<section>
+
+<div>
+
+The quickest way to get started is to download the Adamite starter template. It's preconfigured with all of Adamite's core services.
+
+<Button
+  large
+  text="Download Adamite Boilerplate"
+  icon="import"
+  onClick={() =>
+    window.open("https://github.com/adamitejs/start/archive/master.zip")
+  }
+/>
+
+</div>
+
+```bash
+# Download the template
+wget https://github.com/adamitejs/start/archive/master.zip
+
+# Extract it!
+unzip master.zip your-app
+```
+
+</section>
+
+---
+
+## Install dependencies
+
+<section>
+
+<div>
+
+An Adamite instance is a self-contained NPM package. You can install its dependencies using `npm` or `yarn`.
+
+</div>
+
+```bash
+# Using NPM
+npm install
+
+# Using Yarn
+yarn install
+```
+
+</section>
+
+---
+
+## Install RethinkDb
+
+<section>
+
+<div>
+
+Adamite's database uses RethinkDb under the hood, so you'll need to have a RethinkDB server installed.
+
+<Button large text="Install RethinkDb" rightIcon="arrow-top-right" />
+
+<br /><br />
+
+<Callout title="Configuring the connection" intent={Intent.PRIMARY} icon={null}>
+  By default, Adamite will connect to a locally running RethinkDB instance if
+  one exists. You can customize this by changing the adamite.js config file.
+</Callout>
+
+</div>
+
+</section>
+
+---
+
+## Start the instance
+
+<section>
+
+<div>
+
+Once everything is installed, you can run your Adamite server using `npm` or `yarn`.
+
+</div>
+
+```bash
+# Using NPM
+npm start
+
+# Using Yarn
+yarn start
+```
+
+</section>
+
+---
+
+## Obtain an SDK key
+
+<section>
+
+<div>
+
+On first run, Adamite will generate an SDK key for you to use. You can view this key by opening `data/api.json`. Once you have this key, you can connect to your Adamite instance using the Adamite SDK.
+
+<Button
+  large
+  rightIcon="arrow-top-right"
+  text="Get started with the SDK"
+  onClick={() => navigate("/sdk")}
+/>
+
+</div>
+
+</section>
