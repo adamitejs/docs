@@ -16,6 +16,24 @@
     grid-area: main;
     padding: 50px;
   }
+
+  h1,
+  h2,
+  h3 {
+    .headerLink {
+      position: absolute;
+      right: -20px;
+      top: 5px;
+      background: transparent;
+      display: none;
+    }
+
+    &:hover {
+      .headerLink {
+        display: block;
+      }
+    }
+  }
 }
 
 @media (max-width: 1024px) {
