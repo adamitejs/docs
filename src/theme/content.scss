@@ -1,7 +1,5 @@
 main {
   color: rgb(17, 17, 17);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 
   h1 {
     color: rgb(17, 17, 17);
@@ -106,6 +104,13 @@ main {
 @media (max-width: 1024px) {
   .codebar {
     width: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 

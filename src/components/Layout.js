@@ -3,6 +3,7 @@ import Div100vh from "react-div-100vh"
 import { FocusStyleManager } from "@blueprintjs/core"
 import { MDXProvider } from "@mdx-js/react"
 import Navigation from "./Navigation/Navigation"
+import Code from "./Code"
 import classNames from "classnames"
 import classes from "./Layout.module.scss"
 
@@ -10,7 +11,6 @@ import "normalize.css/normalize.css"
 import "@blueprintjs/core/lib/css/blueprint.css"
 import "@blueprintjs/icons/lib/css/blueprint-icons.css"
 import "../theme/index.scss"
-import Code from "./Code"
 
 FocusStyleManager.onlyShowFocusOnTabs()
 
