@@ -3,15 +3,16 @@
   align-items: center;
 
   :global {
-    .bp3-popover-target,
-    .bp3-popover-wrapper {
+    .bp3-popover-target:first-child,
+    .bp3-popover-wrapper:first-child {
       width: 100%;
     }
   }
 
-  p {
+  .version {
     font-weight: 500;
     margin: 0 0 0 1em;
+    cursor: pointer;
 
     span {
       color: rgb(102, 102, 102);

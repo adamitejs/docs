@@ -39,6 +39,7 @@ export default function ComponentSelect({ location, menuOpen, onMenuClick }) {
                 onClick={() => navigate(c.path)}
                 text={c.name}
                 label={c.version && `v${c.version}`}
+                active={matchingComponent && matchingComponent.path === c.path}
               />
             )
           )}
@@ -46,9 +47,14 @@ export default function ComponentSelect({ location, menuOpen, onMenuClick }) {
       </Popover>
 
       {matchingComponent && matchingComponent.version && (
-        <p>
-          <span>v{matchingComponent.version}</span>
-        </p>
+        <Popover minimal position={Position.BOTTOM_RIGHT}>
+          <p className={classes.version}>
+            <span>v{matchingComponent.version}</span>
+          </p>
+          <Menu>
+            <MenuItem text={`v${matchingComponent.version}`} active />
+          </Menu>
+        </Popover>
       )}
 
       <Button
