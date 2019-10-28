@@ -1,0 +1,88 @@
+import SEO from "../../components/SEO";
+import { Callout, Intent } from "@blueprintjs/core";
+
+<SEO title="Understanding the SDK | SDK" />
+
+# SDK
+
+<span className="lead">
+  Adamite's SDK strives to be easy to understand by following some consistent
+  patterns.
+</span>
+
+## Get an app instance
+
+<section>
+
+<div>
+
+When you call the `adamite` function, it returns an App. An App is the root of the Adamite SDK.
+
+</div>
+
+```js
+const app = adamite();
+```
+
+</section>
+
+### Using multiple apps
+
+<section>
+
+<div>
+
+The Adamite SDK supports connecting to multiple instances from one client. When calling `adamite`, you can optionally
+pass an app name as a string to clarify which app instance you want to access. If you don't pass a string, the app name `default` is used.
+
+</div>
+
+```js
+const secondaryApp = adamite("secondary");
+```
+
+</section>
+
+---
+
+## Access core services
+
+<section>
+
+<div>
+
+Once you have an App instance, you can access the core service plugins with convenience methods.
+
+</div>
+
+```js
+// access the database plugin
+const database = adamite().database();
+
+// access the functions plugin
+const functions = adamite().functions();
+
+// access the auth plugin
+const auth = adamite().auth();
+```
+
+</section>
+
+---
+
+## Access custom plugins
+
+<section>
+
+<div>
+
+You can access custom plugins using the `plugin` method.
+
+</div>
+
+```js
+const customPlugin = adamite().plugin("customPlugin");
+```
+
+</section>
+<br />

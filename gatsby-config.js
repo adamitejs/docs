@@ -7,11 +7,11 @@ module.exports = {
       {
         path: "/architecture",
         name: "Architecture",
-        groups: []
+        groups: [],
       },
       {
         type: "divider",
-        title: "Components"
+        title: "Components",
       },
       {
         path: "/sdk",
@@ -23,36 +23,43 @@ module.exports = {
             name: "Get Started",
             pages: [
               { path: "/sdk", name: "Introduction" },
-              { path: "/sdk/examples", name: "Examples" }
-            ]
+              {
+                path: "/sdk/understanding-the-sdk",
+                name: "Understanding the SDK",
+              },
+            ],
           },
           {
             path: "/sdk/database",
             name: "Database",
             pages: [
               {
+                path: "/sdk/database",
+                name: "Introduction",
+              },
+              {
                 path: "/sdk/database/querying",
                 name: "Querying Data",
                 subpages: [
                   {
                     path: "/sdk/database/querying/filtering",
-                    name: "Filtering Data"
+                    name: "Filtering Data",
                   },
                   {
                     path: "/sdk/database/querying/sorting",
-                    name: "Sorting Data"
+                    name: "Sorting Data",
                   },
                   {
                     path: "/sdk/database/querying/limiting",
-                    name: "Limiting Data"
-                  }
-                ]
+                    name: "Limiting Data",
+                  },
+                ],
               },
               {
                 path: "/sdk/database/modifying",
-                name: "Modifying Data"
-              }
-            ]
+                name: "Modifying Data",
+              },
+            ],
           },
           {
             path: "/sdk/functions",
@@ -60,17 +67,17 @@ module.exports = {
             pages: [
               {
                 path: "/sdk/functions/invoking",
-                name: "Invoking Functions"
-              }
-            ]
-          }
-        ]
+                name: "Invoking Functions",
+              },
+            ],
+          },
+        ],
       },
       {
         path: "/functions",
         name: "Functions",
         version: "0.1.0",
-        groups: []
+        groups: [],
       },
       {
         path: "/database",
@@ -80,7 +87,7 @@ module.exports = {
           {
             path: "/database",
             name: "Get Started",
-            pages: [{ path: "/database", name: "Introduction" }]
+            pages: [{ path: "/database", name: "Introduction" }],
           },
           {
             path: "/database/security",
@@ -93,25 +100,25 @@ module.exports = {
                   { path: "/database/security/reads", name: "Securing Reads" },
                   {
                     path: "/database/security/writes",
-                    name: "Securing Writes"
+                    name: "Securing Writes",
                   },
                   {
                     path: "/database/security/deletes",
-                    name: "Securing Deletes"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+                    name: "Securing Deletes",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
       {
         path: "/auth",
         name: "Auth",
         version: "0.1.0",
-        groups: []
-      }
-    ]
+        groups: [],
+      },
+    ],
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -119,8 +126,8 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`
-      }
+        path: `${__dirname}/src/images`,
+      },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -133,17 +140,17 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png` // This path is relative to the root of the site.
-      }
+        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
     },
     `gatsby-plugin-offline`,
     `gatsby-plugin-mdx`,
     {
       resolve: "gatsby-plugin-layout",
       options: {
-        component: require.resolve("./src/components/Layout")
-      }
+        component: require.resolve("./src/components/Layout"),
+      },
     },
-    `gatsby-plugin-sass`
-  ]
+    `gatsby-plugin-sass`,
+  ],
 };

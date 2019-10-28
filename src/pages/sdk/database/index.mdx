@@ -1,0 +1,38 @@
+# Database
+
+<span className="lead">
+  You can create, read, update, delete, and subscribe to data in your database
+  using the Adamite SDK.
+</span>
+
+## Access the database
+
+<section>
+
+<div>
+  You can access the database using the `database` method on an app instance.
+</div>
+
+```js
+const database = adamite().database();
+```
+
+</section>
+
+---
+
+## Accessing other databases
+
+<section>
+
+<div>
+  Your app can have multiple databases and the SDK can access them. To use a
+  different database, pass the database's name to the `database` method. If you
+  don't pass a name, the default database will be used.
+</div>
+
+```js
+const otherDatabase = adamite().database("other");
+```
+
+</section>

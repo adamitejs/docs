@@ -1,5 +1,5 @@
-import SEO from "../../components/SEO"
-import { Callout, Intent } from "@blueprintjs/core"
+import SEO from "../../components/SEO";
+import { Callout, Intent } from "@blueprintjs/core";
 
 <SEO title="SDK" />
 
@@ -53,7 +53,7 @@ import adamite, {
   AuthPlugin,
   DatabasePlugin,
   FunctionsPlugin,
-} from "@adamite/sdk"
+} from "@adamite/sdk";
 
 adamite()
   .use(AuthPlugin)
@@ -65,7 +65,87 @@ adamite()
     authUrl: "http://localhost:9002",
     functionsUrl: "http://localhost:9003",
     apiKey: "your_api_key",
-  })
+  });
 ```
 
 </section>
+
+---
+
+## Understanding the SDK
+
+<section>
+
+<div>
+
+Adamite's SDK strives to be easy to understand by following some consistent patterns.
+
+</div>
+
+</section>
+
+### Get an app instance
+
+<section>
+
+<div>
+
+When you call the `adamite` function, it returns an App. An App is the root of the Adamite SDK.
+
+</div>
+
+```js
+const app = adamite();
+```
+
+</section>
+
+<section>
+
+<div>
+
+You can optionally pass an app name to the `adamite` function if you want to use more than one app in your client. If you don't pass this string, the app name `default` is used.
+
+</div>
+
+```js
+const secondaryApp = adamite("secondary");
+```
+
+</section>
+<br />
+
+### Access plugins
+
+<section>
+
+<div>
+
+Once you have an App instance, you can access the core plugins with convenience methods.
+
+</div>
+
+```js
+const database = adamite().database();
+const functions = adamite().functions();
+const auth = adamite().auth();
+```
+
+</section>
+
+<br /><br />
+
+<section>
+
+<div>
+
+You can access custom plugins using the `plugin` method.
+
+</div>
+
+```js
+const customPlugin = adamite().plugin("customPlugin");
+```
+
+</section>
+<br />
