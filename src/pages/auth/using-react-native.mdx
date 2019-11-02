@@ -1,0 +1,60 @@
+# Using authentication with React Native
+
+<span className="lead">
+  Most of the Adamite SDK works out of the box with React Native, but the
+  authentication plugin requires some customization so that it can store the
+  auth token.
+</span>
+
+## Using AsyncStorage instead of LocalStorage
+
+<section>
+
+<div>
+
+By default, the auth plugin uses `localStorage` to store an authenticated user's access token. In React Native, `localStorage` isn't supported, so this doesn't work.
+
+Instead, we want to use `AsyncStorage`. We can tell the auth plugin to use `AsyncStorage` with a custom _storage provider_. You can modify your Adamite initialization code with what's shown on the right to accomplish this.
+
+</div>
+
+```js
+import adamite, {
+  AuthPlugin,
+  DatabasePlugin,
+  FunctionsPlugin,
+} from "@adamite/sdk";
+
+import { AsyncStorage } from "react-native";
+
+adamite()
+  .use(AuthPlugin)
+  .use(DatabasePlugin)
+  .use(FunctionsPlugin);
+
+adamite()
+  .auth()
+  .useProvider({
+    getToken(appName) {
+      return AsyncStorage.getItem(`adamite:auth:${appName}:token`);
+    },
+
+    setToken(appName, token) {
+      return AsyncStorage.setItem(`adamite:auth:${appName}:token`, token);
+    },
+
+    clearToken(appName) {
+      return AsyncStorage.removeItem(`adamite:auth:${appName}:token`);
+    },
+  });
+
+adamite().initializeApp({
+  apiUrl: "http://localhost:9000",
+  databaseUrl: "http://localhost:9001",
+  authUrl: "http://localhost:9002",
+  functionsUrl: "http://localhost:9003",
+  apiKey: "your_api_key",
+});
+```
+
+</section>

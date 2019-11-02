@@ -116,7 +116,16 @@ module.exports = {
         path: "/auth",
         name: "Auth",
         version: "0.1.0",
-        groups: [],
+        groups: [
+          {
+            path: "/auth",
+            name: "Get Started",
+            pages: [
+              { path: "/auth", name: "Introduction" },
+              { path: "/auth/using-react-native", name: "Using React Native" },
+            ],
+          },
+        ],
       },
     ],
   },
