@@ -1,0 +1,296 @@
+# Nginx configuration
+
+<section>
+
+<div>
+
+The following configuration example can be used to put Adamite behind SSL using nginx as a proxy.
+
+</div>
+
+```nginx
+############################################################################
+# ADAMITE NGINX CONFIG
+# This file configures nginx to act as a proxy in front of Adamite. It is
+# the recommended way to protect your Adamite instance with SSL.
+#
+# Assumptions:
+# 1. We assume your Adamite instance uses the default ports.
+#    API=9000, Database=9001, Auth=9002, Functions=9003
+#
+#    To change this, adjust the `upstream` definitions below.
+#
+# 2. We assume your Adamite services should be served over subdomains, e.g.
+#    api.yourdomain.com
+#    database.yourdomain.com
+#    auth.yourdomain.com
+#    functions.yourdomain.com
+#
+# 3. We assume you're using the same SSL cert (either a wildcard or a 
+#    multi-domain cert) for each of your services.
+#
+#    To change this, adjust the `ssl_certificate` and 
+#    `ssl_certificate_key` definitions below.
+#
+# 4. We assume you want to redirect HTTP to HTTPS traffic, and have set up
+#    the necessary server definitions to do so.
+#
+# 5. We assume your certifcate and private key files are 
+#    located at /etc/nginx/ssl/yourdomain-cert.pem 
+#    and /etc/nginx/ssl/yourdomain-privkey.pem
+#
+#    To change this, adjust the `ssl_certificate` and 
+#    `ssl_certificate_key` definitions below.
+# 
+# Instructions:
+# 1. Find and replace all instances of "yourdomain.com" with your domain name.
+# 2. Find and replace "yourdomain-cert.pem" with the name of your certificate file.
+# 3. Find and replace "yourdomain-privkey.pem" with the name of your private key file.
+#
+# ! DON'T FORGET TO RESTART YOUR NGINX INSTANCE !
+#
+############################################################################
+
+
+
+#########################################
+# API Config
+#########################################
+
+upstream upstream-adamite-api {
+  server 127.0.0.1:9000;
+}
+
+server {
+  listen 80;
+  server_name api.yourdomain.com;
+  rewrite ^(.*) https://$host$1 permanent;
+}
+
+server {
+  listen 443 ssl;
+
+  ssl on;
+  server_name api.yourdomain.com;
+
+  access_log /var/log/nginx/access-ssl.log;
+  error_log /var/log/nginx/error-ssl.log;
+
+  ssl_certificate /etc/nginx/ssl/yourdomain-cert.pem;
+  ssl_certificate_key /etc/nginx/ssl/yourdomain-privkey.pem;
+
+  ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers RC4:HIGH:!aNULL:!MD5;
+  ssl_prefer_server_ciphers on;
+  keepalive_timeout 60;
+  ssl_session_cache shared:SSL:10m;
+  ssl_session_timeout 10m;
+
+  large_client_header_buffers 8 32k;
+
+  location / {
+    proxy_pass http://upstream-adamite-api;
+    proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+    proxy_redirect off;
+    proxy_buffering off;
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    add_header Front-End-Https on;
+  }
+}
+
+#########################################
+# Database Service Config
+#########################################
+
+upstream upstream-adamite-database {
+  server 127.0.0.1:9001;
+}
+
+server {
+  listen 80;
+  server_name database.yourdomain.com;
+  rewrite ^(.*) https://$host$1 permanent;
+}
+
+server {
+  listen 443 ssl;
+
+  ssl on;
+  server_name database.yourdomain.com;
+
+  access_log /var/log/nginx/access-ssl.log;
+  error_log /var/log/nginx/error-ssl.log;
+
+  ssl_certificate /etc/nginx/ssl/yourdomain-cert.pem;
+  ssl_certificate_key /etc/nginx/ssl/yourdomain-privkey.pem;
+
+  ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers RC4:HIGH:!aNULL:!MD5;
+  ssl_prefer_server_ciphers on;
+  keepalive_timeout 60;
+  ssl_session_cache shared:SSL:10m;
+  ssl_session_timeout 10m;
+
+  large_client_header_buffers 8 32k;
+
+  location / {
+    proxy_pass http://upstream-adamite-database;
+    proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+    proxy_redirect off;
+    proxy_buffering off;
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    add_header Front-End-Https on;
+  }
+
+  location /socket.io/ {
+    proxy_pass http://upstream-adamite-database;
+    proxy_redirect off;
+
+    proxy_http_version 1.1;
+
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+}
+
+#########################################
+# Auth Service Config
+#########################################
+
+upstream upstream-adamite-auth {
+  server 127.0.0.1:9002;
+}
+
+server {
+  listen 80;
+  server_name auth.yourdomain.com;
+  rewrite ^(.*) https://$host$1 permanent;
+}
+
+server {
+  listen 443 ssl;
+
+  ssl on;
+  server_name auth.yourdomain.com;
+
+  access_log /var/log/nginx/access-ssl.log;
+  error_log /var/log/nginx/error-ssl.log;
+
+  ssl_certificate /etc/nginx/ssl/yourdomain-cert.pem;
+  ssl_certificate_key /etc/nginx/ssl/yourdomain-privkey.pem;
+
+  ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers RC4:HIGH:!aNULL:!MD5;
+  ssl_prefer_server_ciphers on;
+  keepalive_timeout 60;
+  ssl_session_cache shared:SSL:10m;
+  ssl_session_timeout 10m;
+
+  large_client_header_buffers 8 32k;
+
+  location / {
+    proxy_pass http://upstream-adamite-auth;
+    proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+    proxy_redirect off;
+    proxy_buffering off;
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    add_header Front-End-Https on;
+  }
+
+  location /socket.io/ {
+    proxy_pass http://upstream-adamite-auth;
+    proxy_redirect off;
+
+    proxy_http_version 1.1;
+
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+}
+
+#########################################
+# Functions Service Config
+#########################################
+
+upstream upstream-adamite-functions {
+  server 127.0.0.1:9003;
+}
+
+server {
+  listen 80;
+  server_name functions.yourdomain.com;
+  rewrite ^(.*) https://$host$1 permanent;
+}
+
+
+server {
+  listen 443 ssl;
+
+  ssl on;
+  server_name functions.yourdomain.com;
+
+  access_log /var/log/nginx/access-ssl.log;
+  error_log /var/log/nginx/error-ssl.log;
+
+  ssl_certificate /etc/nginx/ssl/yourdomain-cert.pem;
+  ssl_certificate_key /etc/nginx/ssl/yourdomain-privkey.pem;
+
+  ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers RC4:HIGH:!aNULL:!MD5;
+  ssl_prefer_server_ciphers on;
+  keepalive_timeout 60;
+  ssl_session_cache shared:SSL:10m;
+  ssl_session_timeout 10m;
+
+  large_client_header_buffers 8 32k;
+
+  location / {
+    proxy_pass http://upstream-adamite-functions;
+    proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+    proxy_redirect off;
+    proxy_buffering off;
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    add_header Front-End-Https on;
+  }
+
+  location /socket.io/ {
+    proxy_pass http://upstream-adamite-functions;
+    proxy_redirect off;
+
+    proxy_http_version 1.1;
+
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+}
+```
+
+</section>

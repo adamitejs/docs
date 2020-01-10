@@ -1,0 +1,243 @@
+import { Callout, Intent } from '@blueprintjs/core';
+
+# Hosting Adamite
+
+<span className="lead">
+  This guide will walk you through the process of hosting Adamite in a production environment.
+</span>
+
+## Precautions
+
+<section>
+
+<div>
+
+<Callout intent={Intent.WARNING} title="Adamite is in beta">
+  Adamite is in beta and has not been well-tested in production environments. Use Adamite at your own risk and do 
+  extensive load testing before assuming it will function well.
+</Callout>
+
+</div>
+
+</section>
+
+
+## Introduction
+
+<section>
+
+<div>
+
+This guide will take you through setting up an individual server running the Adamite stack. We make a few assumptions in this guide
+that you should be aware of. 
+
+* We will be using Ubuntu Server 18.04 running on an AWS EC2 instance. 
+
+* We will be setting up Adamite and putting it behind an Nginx proxy which will enable SSL.
+
+* We will be using Let's Encrypt to generate the SSL certificates as needed.
+
+</div>
+
+</section>
+
+## Install updates
+
+<section>
+
+<div />
+
+```bash
+sudo apt update && sudo apt upgrade
+```
+
+</section>
+
+## Install Required Packages
+
+<section>
+
+<div />
+
+```bash
+sudo apt install nginx docker.io docker-compose
+```
+
+</section>
+
+## Clone your Adamite repo
+
+<section>
+
+<div />
+
+```bash
+git clone https://github.com/adamitejs/start.git your-app
+```
+
+</section>
+
+## Modify adamite.js for Docker
+
+<section>
+
+<div>
+
+By default, Adamite will connect to a RethinkDB database running on `localhost`, but 
+this will be a little different running within Docker. Make the changes shown to `adamite.js`.
+
+</div>
+
+```js
+// adamite.js
+
+module.exports = {
+  // ...
+  services: {
+    // ...
+    database: {
+      // ...
+      config: {
+        // ...
+        adapter: new require("@adamite/service-database/adapters/rethinkdb")({
+          // ...
+          host: "rethinkdb"
+        })
+      }
+    }
+  }
+}
+```
+
+</section>
+
+## Run the app with docker-compose
+
+<section>
+
+<div>
+
+You can use `docker-compose` to start your app. We suggest running `docker-compose` in verbose mode first to make sure your app starts properly.
+
+</div>
+
+```bash
+# Run in the foreground
+sudo docker-compose up
+```
+
+</section>
+
+<section>
+
+<div>
+
+Once you've verified the app runs properly, you can use the `-d` argument to run the app in detached mode.
+
+</div>
+
+```bash
+# Run detached, in the background
+sudo docker-compose up -d
+```
+
+</section>
+
+## Configure nginx
+
+<section>
+
+<div>
+
+First, stop nginx before making configuration changes.
+
+</div>
+
+```bash
+sudo service nginx stop
+```
+
+</section>
+
+<section>
+
+<div>
+
+Now, back up the default configuration.
+
+</div>
+
+```bash
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default-backup
+```
+
+</section>
+
+<section>
+
+<div>
+
+Next, replace the `default` configuration with Adamite's nginx template.
+
+</div>
+
+```bash
+sudo nano /etc/nginx/sites-available/default
+```
+
+</section>
+
+## Generate SSL certs through LetsEncrypt
+
+<section>
+
+<div>
+
+### Install Certbot
+
+Follow the steps listed to install Certbot on the server. If these don't work, you may
+want to check Certbot's [official documentation](https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx).
+
+</div>
+
+```bash
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+
+sudo apt-get install certbot python-certbot-nginx
+```
+
+<div>
+
+### Manually generate certificates
+
+Certbot's automatic certificate generation doesn't work well with our pre-made
+nginx configuration, so we prefer to generate our certificates manually. We suggest
+using a wildcard certificate, but you can specify the individual subdomains as well.
+
+You'll need a certificate that covers the following domains:
+
+* api.yourdomain.com
+* database.yourdomain.com
+* auth.yourdomain.com
+* functions.yourdomain.com
+
+</div>
+
+```bash
+# Generate a wildcard certificate
+
+sudo certbot -d "*.yourdomain.com" --manual --preferred-challenges dns certonly
+
+# Generate a specific certificate
+
+sudo certbot \
+-d "api.yourdomain.com,database.yourdomain.com,auth.yourdomain.com,functions.yourdomain.com" \
+--manual \
+--preferred-challenges dns certonly
+```
+
+</section>
