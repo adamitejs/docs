@@ -11,25 +11,16 @@ import { navigate } from "gatsby"
 
 <div>
 
-The quickest way to get started is to download the Adamite starter template. It's preconfigured with all of Adamite's core services.
-
-<Button
-  large
-  text="Download Adamite Boilerplate"
-  icon="import"
-  onClick={() =>
-    window.open("https://github.com/adamitejs/start/archive/master.zip")
-  }
-/>
+The quickest way to get started is to download the Adamite starter template. It's preconfigured with all of Adamite's core services. We suggest using `degit` to clone the repo...
 
 </div>
 
 ```bash
-# Download the template
-wget https://github.com/adamitejs/start/archive/master.zip
+# degit the starter template
+npx degit adamitejs/start your-app-name
 
-# Extract it!
-unzip master.zip your-app
+# navigate to your new project
+cd your-app-name/
 ```
 
 </section>
@@ -109,7 +100,7 @@ yarn start
 
 <div>
 
-On first run, Adamite will generate an SDK key for you to use. You can view this key by opening `data/api.json`. Once you have this key, you can connect to your Adamite instance using the Adamite SDK.
+On first run, Adamite will generate an SDK key for you to use. The SDK key will be printed in the console when you run your app. You can use the Adamite SDK and that SDK key to connect a client to your instance.
 
 <Button
   large

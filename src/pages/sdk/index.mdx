@@ -42,8 +42,8 @@ Once installed, you can initialize the SDK to connect it to your Adamite instanc
 <br />
 
 <Callout intent={Intent.PRIMARY} icon={null}>
-  On first run, Adamite will generate an SDK key for you to use. You can view
-  this key by opening data/api.json.
+  On first run, Adamite will generate an SDK key for you to use. The SDK key will be printed
+  to the console when you run your server.
 </Callout>
 
 </div>
@@ -60,10 +60,7 @@ adamite()
   .use(DatabasePlugin)
   .use(FunctionsPlugin)
   .initializeApp({
-    apiUrl: "http://localhost:9000",
-    databaseUrl: "http://localhost:9001",
-    authUrl: "http://localhost:9002",
-    functionsUrl: "http://localhost:9003",
+    url: "http://localhost:9000",
     apiKey: "your_api_key",
   });
 ```
